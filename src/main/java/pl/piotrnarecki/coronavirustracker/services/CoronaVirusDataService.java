@@ -65,5 +65,7 @@ public class CoronaVirusDataService {
 
     }
 
-
+    public List<LocationStats> getAllStats() {
+        return allStats;
+    }
 }
