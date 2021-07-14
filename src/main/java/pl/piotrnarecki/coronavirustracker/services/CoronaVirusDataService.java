@@ -36,7 +36,6 @@ public class CoronaVirusDataService {
                 .build();
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(httpResponse.body());
 
 // zamiana CVS na String
 
@@ -52,9 +51,13 @@ public class CoronaVirusDataService {
             locationStat.setState(record.get("Province/State"));
             locationStat.setCountry(record.get("Country/Region"));
 
-            locationStat.setLatestTotalCases(Integer.parseInt(record.get(record.size() - 1)));
+            int latestCases = Integer.parseInt(record.get(record.size() - 1));
+            int prevDayCases = Integer.parseInt(record.get(record.size() - 2));
 
-            System.out.println(locationStat);
+
+            locationStat.setLatestTotalCases(latestCases);
+            locationStat.setDiffFromPrevDay(latestCases - prevDayCases);
+
 
             newStats.add(locationStat);
 
